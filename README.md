@@ -135,3 +135,56 @@ dataform compile --vars=exampleVar=exampleValue,foo=bar # pass custom compilatio
 dataform run --dry-run
 dataform run
 ```
+
+## Document with descriptions in config block
+
+Descriptions can be added for both tables/views and individual columns.
+```
+config {
+  type: "table",
+  schema: "reporting",
+  description: "add the number of medals for each country",
+}
+```
+
+## Test with assertions in config block
+
+- Add tests in the config block
+- Built-in tests include: uniqueKey, nonNull, and rowConditions
+- Manuals assertions using SQL
+
+```
+# tests
+
+config {
+  type: "table",
+  schema: "reporting",
+  assertions: {
+    uniqueKey: ["Country"],
+    nonNull: ["Country", "Rank"],
+    rowConditions: [
+      'Rank > 0',
+      'Total like "[0-9]+"'
+    ]
+  }
+  description: "add the number of medals for each country",
+}
+```
+
+```
+# Manuals assertions using SQL
+
+
+config { type: "assertion" }
+
+SELECT
+  *
+FROM
+  ${ref("sometable")}
+WHERE
+  a IS NULL
+  OR b IS NULL
+  OR c IS NULL
+```
+
+## Reduce code redundancy with Javascript
