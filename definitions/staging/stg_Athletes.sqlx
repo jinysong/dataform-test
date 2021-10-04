@@ -1,0 +1,12 @@
+config {
+  type: "view",
+  schema: "staging",
+  description: "athletes by discipline"
+}
+
+SELECT
+    count(string_field_0) as num_Athletes,
+    string_field_1 as Country,
+    string_field_2 as Discipline
+FROM ${ref("Athletes")}
+GROUP BY 2,3

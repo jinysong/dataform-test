@@ -1,0 +1,15 @@
+config {
+  type: "table",
+  schema: "reporting",
+  description: "combine number of athletes and number of coaches for each country and discipline",
+}
+
+select
+  Athletes.Country as Country,
+  Athletes.Discipline as Discipline,
+  num_Athletes,
+  num_Coaches
+from ${ref("stg_Athletes")} as Athletes
+join ${ref("stg_Coaches")} as Coaches
+on Athletes.Country = Coaches.Country
+    and Athletes.Discipline = Coaches.Discipline

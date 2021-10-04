@@ -1,0 +1,21 @@
+config {
+  type: "table",
+  schema: "reporting",
+  description: "add the number of medals for each country",
+}
+
+select
+  Team_NOC as Country,
+  count(Discipline) as num_Disciplines,
+  sum(num_Athletes) as num_Athletes,
+  sum(num_Coaches) as num_Coaches,
+  Rank,
+  Gold,
+  Silver,
+  Bronze,
+  Total
+
+from ${ref("Country_Discipline")} as Country_Discipline
+join ${ref("Medals")} as Medals
+on Country_Discipline.Country = Medals.Team_NOC
+group by 1,5,6,7,8,9

@@ -1,0 +1,7 @@
+config {
+  type: "declaration",
+  database: "dataform-test-327822",
+  schema: "raw",
+  name: "Coaches",
+  description: "coaches from the 2021 olmypics"
+}
