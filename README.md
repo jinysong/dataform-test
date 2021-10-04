@@ -188,3 +188,6 @@ WHERE
 ```
 
 ## Reduce code redundancy with Javascript
+
+
+## BigQuery considerations (partition & clustering)
